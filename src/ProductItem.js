@@ -15,10 +15,12 @@ class ProductItem extends Component {
 
   onEdit(){
     this.setState({isEdit : true});
+
   }
   onEditSubmit(event){
     event.preventDefault();
-    this.props.onEditSubmit(this.nameInput.value, this.priceInput.value);
+    this.props.onEditSubmit(this.nameInput.value, this.priceInput.value, this.props.name);
+    this.setState({ isEdit : false});
   }
   onDelete(){
     this.props.onDelete(this.props.name);

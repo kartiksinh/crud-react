@@ -52,8 +52,16 @@ class App extends Component {
     });
     this.setState({products: filteredProducts });  
   }
-  onEditSubmit(name, price){
-    console.log(name, price);
+  onEditSubmit(name, price, originalName){
+    let products = this.getProducts();
+    products = products.map(product=>{
+      if(product.name === originalName){
+        product.name = name;
+        product.price = price ;
+      }
+      return product;
+    });
+    this.setState({ products});
   }
 
   render() {
