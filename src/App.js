@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  onSubmit(event){
+    console.log('event', event)
+    event.preventDefault();
+    console.log(this.input.value);
+  }
   onClick(){
     alert("hey ssup!!!");
   }
@@ -20,11 +24,14 @@ class App extends Component {
           {
             List.map(item=>{
               return (
-                <div onClick={this.onClick}>{item}</div>
-              )
+                <div key={item} onClick={this.onClick}>{item}</div>
+              ) 
             })
           }
         </h1>
+        <form onSubmit={this.onSubmit}>
+          <input onChange={this.onChange}></input>
+        </form>
       </div>
     );
   }
