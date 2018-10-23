@@ -25,6 +25,7 @@ class App extends Component {
 
     this.onDelete = this.onDelete.bind(this);
     this.onAdd = this.onAdd.bind(this);
+    this.onEditSubmit = this.onEditSubmit.bind(this);
   }
   componentWillMount(){
     const products = this.getProducts();
@@ -51,6 +52,9 @@ class App extends Component {
     });
     this.setState({products: filteredProducts });  
   }
+  onEditSubmit(name, price){
+    console.log(name, price);
+  }
 
   render() {
     return (
@@ -65,7 +69,8 @@ class App extends Component {
               <ProductItem
                 key={product.name}
                 {...product}
-                onDelete={this.onDelete}  
+                onDelete={this.onDelete}
+                onEditSubmit={this.onEditSubmit}  
               />
             );
           })
