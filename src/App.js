@@ -1,37 +1,45 @@
 import React, { Component } from 'react';
+import MyComponent from './MyComponent';
 import './App.css';
 
-class App extends Component {
-  onSubmit(event){
-    console.log('event', event)
-    event.preventDefault();
-    console.log(this.input.value);
+const products = [
+  {
+    name: 'iPad',
+    price: 20000
+  },
+  {
+    name: 'iPhone',
+    price: 60000
   }
-  onClick(){
-    alert("hey ssup!!!");
+];
+
+localStorage.setItem('products', JSON.stringify(products));
+
+class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      products: []
+    };
+  }
+  componentWillMount(){
+    const products =  JSON.parse(localStorage.getItem('products'));
+    this.setState({ products });
   }
 
   render() {
-     const List = [
-      'Item 1',
-      'Item 2',
-      'Item 3'
-     ]; 
-
     return (
       <div className="App">
-        <h1>
-          {
-            List.map(item=>{
-              return (
-                <div key={item} onClick={this.onClick}>{item}</div>
-              ) 
-            })
-          }
-        </h1>
-        <form onSubmit={this.onSubmit}>
-          <input onChange={this.onChange}></input>
-        </form>
+        <h1>Product Manager</h1>
+        {
+          this.state.products.map(product =>{
+            return(
+              <div key={product.name}>
+                <span>{product.name}</span> | <span>{product.price}</span>
+              </div>
+              )
+          })
+        }
       </div>
     );
   }
